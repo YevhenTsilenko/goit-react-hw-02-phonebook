@@ -20,17 +20,19 @@ class App extends Component {
   handleSubmit = ({ name, number }) => {
     if(this.state.contacts.find(contact => contact.name === name)) {
       alert(`${name} already exists`)
+    } else {
+      this.setState(({ contacts }) => ({
+        contacts: [
+          ...contacts,
+          {
+            id: shortid.generate(),
+            name: name,
+            number: number,
+          },
+        ],
+      }))
     }
-    this.setState(({ contacts }) => ({
-      contacts: [
-        ...contacts,
-        {
-          id: shortid.generate(),
-          name: name,
-          number: number,
-        },
-      ],
-    }))
+
   }
 
   hendleRemove = (id) => {
